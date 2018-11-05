@@ -17,9 +17,14 @@
 
 <body>
     <script>
+        var search = location.search.slice(1);
+        var reg = /url=(.+)/;
+        var match = reg.exec(search);
+        var url = match && match[1];
+        url = url || '/index.html';
+        console.log(match);
         var xhr = new XMLHttpRequest();
-        xhr.open('get', 'http://localhost:3000/product/queryProduct?page=1&pageSize=3');
-
+        xhr.open('get', '/api/product/queryProduct?page=1&pageSize=3');
         xhr.addEventListener('readystatechange', function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 console.log(xhr.responseText);
